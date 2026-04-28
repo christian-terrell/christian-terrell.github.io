@@ -1,11 +1,626 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christian Terrell</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christian Terrell | Tenacity is a Lifestyle</title>
+  <meta name="description" content="Christian Terrell — Cybersecurity professional, content creator, and founder of AUROCHS. Tenacity is a lifestyle." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:     #cc1100;
+      --red-dim: #8a0c00;
+      --silver:  #c0c0c0;
+      --white:   #f0ede8;
+      --black:   #0a0a0a;
+      --dark:    #111111;
+      --mid:     #1a1a1a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    /* ── NAVIGATION ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(204, 17, 0, 0.2);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--silver);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--red); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 75% 50%, rgba(204,17,0,0.08) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 40% at 20% 80%, rgba(204,17,0,0.05) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title .brand {
+      color: var(--red);
+      display: block;
+    }
+
+    .hero-tagline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-top: 1.2rem;
+      margin-bottom: 3rem;
+      opacity: 0.85;
+    }
+
+    .hero-tagline em {
+      color: var(--white);
+      font-style: normal;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      padding: 0.85rem 2.2rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--red-dim); transform: translateY(-2px); }
+
+    .btn-outline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--silver);
+      border: 1px solid rgba(192,192,192,0.35);
+      padding: 0.85rem 2.2rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--red);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 3rem;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(192,192,192,0.4);
+    }
+
+    .scroll-line {
+      width: 40px;
+      height: 1px;
+      background: rgba(192,192,192,0.3);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; width: 40px; }
+      50% { opacity: 0.7; width: 60px; }
+    }
+
+    /* ── DIVIDER ── */
+    .red-divider {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--red) 30%, var(--red) 70%, transparent);
+      opacity: 0.6;
+    }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      background: var(--dark);
+      padding: 6rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-body {
+      color: rgba(240,237,232,0.65);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 520px;
+    }
+
+    .section-body strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* ── PILLARS ── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(204,17,0,0.15);
+    }
+
+    .pillar {
+      background: var(--dark);
+      padding: 3rem 2rem;
+      border-top: 2px solid transparent;
+      transition: border-color 0.25s, background 0.25s;
+      cursor: default;
+    }
+
+    .pillar:hover {
+      border-top-color: var(--red);
+      background: var(--mid);
+    }
+
+    .pillar-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: rgba(204,17,0,0.18);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      transition: color 0.25s;
+    }
+
+    .pillar:hover .pillar-number { color: rgba(204,17,0,0.5); }
+
+    .pillar-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .pillar-text {
+      font-size: 0.9rem;
+      color: rgba(240,237,232,0.55);
+      line-height: 1.7;
+    }
+
+    /* ── COMING SOON SECTION ── */
+    .coming-soon {
+      padding: 6rem 3rem;
+      text-align: center;
+      background: var(--black);
+    }
+
+    .coming-soon .section-label {
+      justify-content: center;
+    }
+
+    .coming-soon .section-label::before { display: none; }
+
+    .coming-soon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cs-card {
+      border: 1px solid rgba(204,17,0,0.2);
+      padding: 2.5rem 1.5rem;
+      transition: border-color 0.25s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cs-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .cs-card:hover { border-color: rgba(204,17,0,0.5); transform: translateY(-4px); }
+    .cs-card:hover::before { transform: scaleX(1); }
+
+    .cs-icon {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--red);
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    .cs-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .cs-text {
+      font-size: 0.88rem;
+      color: rgba(240,237,232,0.5);
+      line-height: 1.6;
+    }
+
+    .cs-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid rgba(204,17,0,0.4);
+      padding: 0.25rem 0.75rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(204,17,0,0.2);
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: var(--white);
+    }
+
+    .footer-brand span { color: var(--red); }
+
+    .footer-tagline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(192,192,192,0.4);
+      margin-top: 0.25rem;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: rgba(192,192,192,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FADE IN ANIMATION ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .nav-links a { font-size: 0.75rem; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .hero-scroll { left: 1.5rem; }
+      .about-strip { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+      .pillars { grid-template-columns: 1fr; }
+      .coming-soon { padding: 4rem 1.5rem; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Coming Soon</h1>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#" class="nav-logo">AUROCHS <span>/</span> CT</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#content">Content</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Cybersecurity · Content · AUROCHS</p>
+      <h1 class="hero-title">
+        Christian
+        <span class="brand">Terrell</span>
+      </h1>
+      <p class="hero-tagline">"<em>Tenacity</em> is a lifestyle"</p>
+      <div class="hero-cta">
+        <a href="#about" class="btn-primary">Enter the Brand</a>
+        <a href="#content" class="btn-outline">See the Work</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span class="scroll-line"></span>
+      Scroll
+    </div>
+  </section>
+
+  <div class="red-divider"></div>
+
+  <!-- ABOUT STRIP -->
+  <section class="about-strip" id="about">
+    <div class="fade-in">
+      <p class="section-label">The Origin</p>
+      <h2 class="section-title">Built From The Brink</h2>
+      <p class="section-body">
+        The aurochs was an ancient wild bull. Massive. Feared. <strong>Extinct.</strong>
+        The kind of force that doesn't ask permission and doesn't explain itself.
+        <br><br>
+        That energy is the foundation of everything built here. Cybersecurity, content,
+        podcasting, storytelling. <strong>All of it raw. All of it real.</strong>
+        Built by someone who knows exactly what it costs to keep going.
+      </p>
+    </div>
+    <div class="fade-in">
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-number">01</div>
+          <div class="pillar-title">Cybersecurity</div>
+          <p class="pillar-text">Defense, offense, and everything in between. Building the skillset from the ground up.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-number">02</div>
+          <div class="pillar-title">Content</div>
+          <p class="pillar-text">Unfiltered perspective. Honest storytelling. Tech explained without the pretension.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-number">03</div>
+          <div class="pillar-title">Auroch</div>
+          <p class="pillar-text">The AI persona. The unfiltered voice. Raw, unhinged, and unapologetically direct.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="red-divider"></div>
+
+  <!-- COMING SOON SECTION -->
+  <section class="coming-soon" id="content">
+    <p class="section-label">What's Coming</p>
+    <h2 class="section-title fade-in">The Build Is Live</h2>
+    <p class="section-body fade-in" style="margin: 0 auto; text-align:center;">
+      Everything below is actively in development. Check back often.
+    </p>
+    <div class="coming-soon-grid">
+      <div class="cs-card fade-in">
+        <div class="cs-icon">BLOG</div>
+        <div class="cs-title">The Journal</div>
+        <p class="cs-text">Learning in public. Cybersecurity, tech, the grind, and the wins.</p>
+        <span class="cs-badge">Coming Soon</span>
+      </div>
+      <div class="cs-card fade-in">
+        <div class="cs-icon">POD</div>
+        <div class="cs-title">The Podcast</div>
+        <p class="cs-text">Real conversations. No filter. Tech, life, and what it actually takes.</p>
+        <span class="cs-badge">In Development</span>
+      </div>
+      <div class="cs-card fade-in">
+        <div class="cs-icon">PORT</div>
+        <div class="cs-title">Portfolio</div>
+        <p class="cs-text">Projects, certifications, and proof of work. Built and documented openly.</p>
+        <span class="cs-badge">Building Now</span>
+      </div>
+      <div class="cs-card fade-in">
+        <div class="cs-icon">ION</div>
+        <div class="cs-title">ION Project</div>
+        <p class="cs-text">An LLM project in the works. Details dropping when it's ready.</p>
+        <span class="cs-badge">Classified</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div>
+      <div class="footer-brand">AUROCHS <span>/</span> CHRISTIAN TERRELL</div>
+      <div class="footer-tagline">"Tenacity is a lifestyle"</div>
+    </div>
+    <div class="footer-copy">
+      &copy; 2026 Christian Terrell &mdash; christianterrell.com
+    </div>
+  </footer>
+
+  <!-- SCROLL ANIMATION SCRIPT -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
